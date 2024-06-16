@@ -16,6 +16,8 @@ function refreshWeather(response) {
   windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
   temperatureElement.innerHTML = Math.round(temperature);
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
+
+  displayForecast(response.data.city);
 }
 
 function formatDate(date) {
@@ -53,10 +55,13 @@ function handleSearchSubmit(event) {
   searchCity(searchInput.value);
 }
 
-let searchFormElement = document.querySelector("#search-form");
-searchFormElement.addEventListener("submit", handleSearchSubmit);
+function getForecast(city) {
+  let apiKey = "20ao53abceat410d7090d5fb4a77c102";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios(apiUrl).then(displayForecast);
+}
 
-function displayForecast() {
+function displayForecast(response) {
   let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   let forecastHtml = "";
 
@@ -67,7 +72,7 @@ function displayForecast() {
       <div class="weather-forecast-day">
       <div class="weather-forecast-date">${day}</div>
           <div class="weather-forecast-icon">
-          <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/broken-clouds-day.png" alt=""/>
+          🌥
           </div>
           <div class="weather-forecast-temperatures">
             <div class="weather-forecast-temperature">18°</div>
@@ -81,5 +86,7 @@ function displayForecast() {
   forecastElement.innerHTML = forecastHtml;
 }
 
+let searchFormElement = document.querySelector("#search-form");
+searchFormElement.addEventListener("submit", handleSearchSubmit);
+
 searchCity("Tallinn");
-displayForecast();
