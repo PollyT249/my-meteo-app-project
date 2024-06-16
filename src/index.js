@@ -56,4 +56,30 @@ function handleSearchSubmit(event) {
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
+function displayForecast() {
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  let forecastHtml = "";
+
+  days.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `  
+      <div class="weather-forecast-day">
+      <div class="weather-forecast-date">${day}</div>
+          <div class="weather-forecast-icon">
+          <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/broken-clouds-day.png" alt=""/>
+          </div>
+          <div class="weather-forecast-temperatures">
+            <div class="weather-forecast-temperature">18°</div>
+            <div class="weather-forecast-temperature">12°</div>
+          </div>
+          </div>
+          `;
+  });
+
+  let forecastElement = document.querySelector("#weather-forecast");
+  forecastElement.innerHTML = forecastHtml;
+}
+
 searchCity("Tallinn");
+displayForecast();
