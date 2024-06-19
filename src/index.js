@@ -62,6 +62,8 @@ function getForecast(city) {
 }
 
 function displayForecast(response) {
+  console.log(response.data);
+
   let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   let forecastHtml = "";
 
@@ -72,7 +74,7 @@ function displayForecast(response) {
       <div class="weather-forecast-day">
       <div class="weather-forecast-date">${day}</div>
           <div class="weather-forecast-icon">
-          🌥
+          <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-day.png" alt="" />
           </div>
           <div class="weather-forecast-temperatures">
             <div class="weather-forecast-temperature">18°</div>
